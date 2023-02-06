@@ -48,7 +48,30 @@ a:visited {
   display: flex;
   flex-direction: column;
 }
-
+.btn__order{
+  background-color: var(--color-brand--2);
+  width: 10rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: var(--color-light--2);
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn__zoom{
+  background-color: var(--color-brand--2);
+  width: 11.5rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: var(--color-light--2);
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+}
 .logo {
   height: 5.2rem;
   align-self: center;
@@ -218,3 +241,7 @@ a:visited {
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
 }
+.edit__icon{
+  cursor: pointer;
+}
+

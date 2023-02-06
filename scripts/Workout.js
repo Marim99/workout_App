@@ -2,7 +2,8 @@ export default class WorkOut {
   date = new Date();
   id = (Date.now() + '').slice(-10);
   clicks = 0;
-  constructor(coords, distance, duration) {
+  constructor(coords, distance, duration, marker) {
+    this.marker = marker;
     this.coords = coords;
     this.distance = distance;
     this.duration = duration;
