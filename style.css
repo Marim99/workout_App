@@ -112,7 +112,7 @@ a:visited {
   width: 22px;
   left: 0px;
   bottom: -5px;
-  background-image: url('./sun.svg');
+  background-image: url('./assets/sun.svg');
   background-size: cover;
   background-color: white;
   -webkit-transition: .4s;
@@ -134,7 +134,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
   background-color: var(--color-dark--1);
   border: 1px solid var(--color-brand--2);
-  background-image: url('./moon.svg');
+  background-image: url('./assets/moon.svg');
   background-size: cover;
   left: 0;
 }

@@ -293,9 +293,12 @@ class App {
       });
       this.#map.fitBounds(markerBounds);
     }
-    zoomIcon.setAttribute('src', './eyeOpen.svg');
+    zoomIcon.setAttribute('src', './assets/eyeOpen.svg');
 
-    setTimeout(() => zoomIcon.setAttribute('src', './eyeClose.svg'), 1000);
+    setTimeout(
+      () => zoomIcon.setAttribute('src', './assets/eyeClose.svg'),
+      1000
+    );
   }
   _chengeTheme(e) {
     if (!e.target.checked) {
