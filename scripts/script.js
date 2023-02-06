@@ -13,6 +13,8 @@ const inputElevation = document.querySelector('.form__input--elevation');
 const sortBtn = document.querySelector('.btn__order');
 const zoomBtn = document.querySelector('.btn__zoom');
 const deleteAllBtn = document.querySelector('#deleteAll');
+const theme = document.querySelector('.theme');
+const zoomIcon = document.querySelector('.workout__icon__zoom');
 
 // ! App Class
 class App {
@@ -20,23 +22,22 @@ class App {
   #mapZoomLevel = 13;
   #mapEvent;
   #workouts = [];
-  #submiter = 'new';
+
   #markers = [];
   constructor() {
     this._getPosition();
     // get data from local storage
     this._getLocalStorage();
     // event handlers
-    if (this.#submiter === 'new') {
-      console.log('hii');
-      form.addEventListener('submit', this._newWorkOut.bind(this));
-    }
+
+    form.addEventListener('submit', this._newWorkOut.bind(this));
 
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
     sortBtn.addEventListener('click', this._sortWorkouts.bind(this));
     zoomBtn.addEventListener('click', this._zoomMap.bind(this));
     deleteAllBtn.addEventListener('click', this.reset);
+    theme.addEventListener('change', this._chengeTheme);
   }
   _getPosition() {
     if (navigator.geolocation) {
@@ -248,10 +249,11 @@ class App {
     // this.#map.removeLayer(
     //   this.#workouts.find(w => w.id == workout.dataset.id).marker
     // );
+    location.reload();
   }
   _editWorkout(editWorkout) {
     let list;
-    this.#submiter = 'edit';
+
     const workout = this.#workouts.find(w => w.id === editWorkout.dataset.id);
     this._showForm(this.#mapEvent);
     inputDistance.value = workout.distance;
@@ -263,10 +265,16 @@ class App {
       let workIndex = list.findIndex(w => w.id == editWorkout.dataset.id);
       list[workIndex].distance = +inputDistance.value;
       list[workIndex].duration = +inputDuration.value;
-      list[workIndex].cadence = +inputCadence.value;
+      if (workout.type === 'running')
+        list[workIndex].cadence = +inputCadence.value;
+      else {
+        list[workIndex].elevationGain = +inputElevation.value;
+      }
       localStorage.setItem('workouts', JSON.stringify(list));
+      location.reload();
     });
     this.#workouts = list;
+
     // this.#submiter = 'new';
   }
   _sortWorkouts() {
@@ -284,6 +292,37 @@ class App {
         markerBounds.extend([marker._latlng.lat, marker._latlng.lng]);
       });
       this.#map.fitBounds(markerBounds);
+    }
+    zoomIcon.setAttribute('src', './eyeOpen.svg');
+
+    setTimeout(() => zoomIcon.setAttribute('src', './eyeClose.svg'), 1000);
+  }
+  _chengeTheme(e) {
+    if (!e.target.checked) {
+      document.documentElement.style.setProperty('--color-dark--1', ' #00c46a');
+      document.documentElement.style.setProperty(
+        '--color-light--2',
+        ' #2d3439'
+      );
+      document.documentElement.style.setProperty(
+        '--color-light--1',
+        ' #42484d'
+      );
+      document.documentElement.style.setProperty('--color-dark--2', ' #a6c3b0');
+      document.documentElement.style.setProperty(
+        '--color-brand--2',
+        ' #2d3439'
+      );
+    }
+    if (e.target.checked) {
+      document.documentElement.style.setProperty('--color-dark--1', '#2d3439');
+      document.documentElement.style.setProperty('--color-dark--2', '#42484d');
+      document.documentElement.style.setProperty('--color-brand--2', '#00c46a');
+      document.documentElement.style.setProperty(
+        '--color-light--2',
+        ' #ececec'
+      );
+      document.documentElement.style.setProperty('--color-light--1', ' #aaa');
     }
   }
   reset() {

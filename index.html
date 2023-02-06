@@ -30,7 +30,6 @@
   <body>
     <div class="sidebar">
       <img src="logo.png" alt="Logo" class="logo" />
-
       <ul class="workouts">
         <div class="workouts__bar">
           <button class="btn__order" title="sort your workouts by Duration">
@@ -44,8 +43,15 @@
             🗑️
           </span>
           <button class="btn__zoom" title="sort your workouts by Duration">
-            Zoom out <span class="workout__icon">👀</span>
+            <img src="./eyeClose.svg" class="workout__icon__zoom"></img>
           </button>
+          <div>
+            <label class="switch">
+              <input type="checkbox" checked class="theme" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+
         </div>
 
         <form class="form hidden">
